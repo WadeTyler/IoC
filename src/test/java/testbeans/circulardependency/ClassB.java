@@ -1,4 +1,4 @@
-package samplebeans.circulardependency;
+package testbeans.circulardependency;
 
 import lombok.RequiredArgsConstructor;
 

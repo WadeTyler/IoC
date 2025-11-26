@@ -1,10 +1,10 @@
 import net.tylerwade.ioc.IoCContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import samplebeans.user.User;
-import samplebeans.user.UserController;
-import samplebeans.user.UserRepo;
-import samplebeans.user.UserService;
+import testbeans.user.User;
+import testbeans.user.UserController;
+import testbeans.user.UserRepo;
+import testbeans.user.UserService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,7 +84,7 @@ public class IoCContextTests {
 	@Test
 	public void userControllerCreatesWithDependencies() {
 
-		UserController userController = IoCContext.getBean(samplebeans.user.UserController.class);
+		UserController userController = IoCContext.getBean(testbeans.user.UserController.class);
 
 		UserService userService = IoCContext.getBean(UserService.class);
 		UserRepo userRepo = IoCContext.getBean(UserRepo.class);

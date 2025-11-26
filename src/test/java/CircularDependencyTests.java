@@ -2,9 +2,9 @@ import net.tylerwade.ioc.IoCContext;
 import net.tylerwade.ioc.exception.CircularDependencyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import samplebeans.circulardependency.ClassA;
-import samplebeans.circulardependency.ClassB;
-import samplebeans.circulardependency.ClassC;
+import testbeans.circulardependency.ClassA;
+import testbeans.circulardependency.ClassB;
+import testbeans.circulardependency.ClassC;
 
 import static org.junit.jupiter.api.Assertions.*;
 
