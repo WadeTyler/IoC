@@ -1,4 +1,4 @@
-package samplebeans;
+package samplebeans.user;
 
 import java.util.HashMap;
 import java.util.Map;

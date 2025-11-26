@@ -1,4 +1,4 @@
-package samplebeans;
+package samplebeans.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
