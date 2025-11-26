@@ -13,6 +13,7 @@ public class IoCContextTests {
 
 	@BeforeEach
 	public void setup() {
+
 		IoCContext.clear();
 	}
 
@@ -24,7 +25,7 @@ public class IoCContextTests {
 	@Test
 	public void userServiceRegisters() {
 
-		UserService userService = IoCContext.getBean(UserService.class);
+		IoCContext.getBean(UserService.class);
 	}
 
 	@Test
@@ -74,6 +75,7 @@ public class IoCContextTests {
 
 	@Test
 	public void doesNotCreateNewUserRepoAfterUserService() {
+
 		UserService userService = IoCContext.getBean(UserService.class);
 
 		UserRepo userRepo = IoCContext.getBean(UserRepo.class);

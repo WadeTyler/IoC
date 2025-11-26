@@ -111,7 +111,8 @@ public class IoCContext {
 	/**
 	 * Checks for circular dependencies in the constructor parameters.
 	 * Implements a recursive depth-first search to detect cycles.
-	 * @param clazz the class to check
+	 *
+	 * @param clazz   the class to check
 	 * @param parents the set of parent classes in the current dependency chain
 	 */
 	private static void checkForCircularDependency(Class<?> clazz, Set<Class<?>> parents) {

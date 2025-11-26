@@ -1,15 +1,11 @@
 package net.tylerwade.ioc;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Manages locks for bean creation to prevent circular dependencies.
  */
-@NoArgsConstructor
 class BeanLockManager {
 
 	private static final Set<Class<?>> beanCreationLocks = new HashSet<>();

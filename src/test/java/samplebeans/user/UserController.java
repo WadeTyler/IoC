@@ -1,5 +1,6 @@
 package samplebeans.user;
 
+
 public class UserController {
 
 	private final UserService userService;

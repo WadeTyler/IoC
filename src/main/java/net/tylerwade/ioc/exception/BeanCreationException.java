@@ -1,7 +1,10 @@
 package net.tylerwade.ioc.exception;
 
+import lombok.Getter;
+
 import java.lang.reflect.Constructor;
 
+@Getter
 public class BeanCreationException extends IllegalArgumentException {
 	private final Class<?> clazz;
 	private final Constructor<?> constructor;
