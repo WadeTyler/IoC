@@ -58,6 +58,7 @@ class BeanFactory {
 	private static void validateBeanType(Class<?> type) {
 
 		if (type.isPrimitive()
+				|| type.getName().startsWith("net.tylerwade.ioc.")
 				|| type.getName().startsWith("java.lang.")
 				|| type.getName().startsWith("java.util.")
 				|| type.getName().startsWith("java.time.")

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StandardClassTests {
+public class BeanCreationValidationTests {
 
 	@BeforeEach
 	public void setUp() {
@@ -59,6 +59,21 @@ public class StandardClassTests {
 				String.class,
 				Object.class
 		);
+	}
+
+	@Test
+	void creatingArrayBeanShouldThrow() {
+		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(int[].class));
+	}
+
+	@Test
+	void creatingEnumBeanShouldThrow() {
+		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(Thread.State.class));
+	}
+
+	@Test
+	void creatingIoCContextBeanShouldThrow() {
+		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(IoCContext.class));
 	}
 
 

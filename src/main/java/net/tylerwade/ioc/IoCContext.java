@@ -23,7 +23,6 @@ public class IoCContext {
 	public static <T> T getBean(Class<?> beanType) {
 
 		assertThat("beanType must not be null", beanType != null);
-		assertThat("Cannot retrieve a bean of IoCContext type", !beanType.equals(IoCContext.class));
 
 		try {
 			while (BeanLockManager.isLocked(beanType)) {
