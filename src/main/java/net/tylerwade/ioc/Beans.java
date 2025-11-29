@@ -84,6 +84,10 @@ public class Beans {
 		beans.remove(beanType);
 	}
 
+	/**
+	 * Removes a bean and all its dependencies from the IoC context.
+	 * @param beanType the class type of the bean to remove
+	 */
 	public static void removeWithDependencies(Class<?> beanType) {
 
 		if (!exists(beanType)) {
