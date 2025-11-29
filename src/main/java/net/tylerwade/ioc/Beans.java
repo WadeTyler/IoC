@@ -3,13 +3,14 @@ package net.tylerwade.ioc;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.*;
 
 @Slf4j
-public class IoCContext {
+public class Beans {
 
 	private static final Map<Class<?>, Object> beans = new HashMap<>();
 
@@ -20,7 +21,7 @@ public class IoCContext {
 	 * @param <T>      the type of the bean
 	 * @return the requested bean instance
 	 */
-	public static <T> T getBean(Class<?> beanType) {
+	public static <T> T inject(Class<?> beanType) {
 
 		assertThat("beanType must not be null", beanType != null);
 
@@ -29,7 +30,7 @@ public class IoCContext {
 				// Busy-wait until the bean is fully created.
 			}
 
-			if (!beanExists(beanType)) {
+			if (!exists(beanType)) {
 				Object bean = BeanFactory.createBean(beanType);
 				beans.put(beanType, bean);
 				log.info("Bean for {} created and stored in context", beanType.getName());
@@ -48,11 +49,22 @@ public class IoCContext {
 	 * @param beanType the class type of the bean to check
 	 * @return true if the bean exists, false otherwise
 	 */
-	public static boolean beanExists(Class<?> beanType) {
+	public static boolean exists(Class<?> beanType) {
 
 		return beans.containsKey(beanType);
 	}
 
+
+	/**
+	 * Checks if a bean of the specified type is currently being created.
+	 *
+	 * @param beanType the class type of the bean to check
+	 * @return true if the bean is being created, false otherwise
+	 */
+	public static boolean isCreating(Class<?> beanType) {
+
+		return BeanLockManager.isLocked(beanType);
+	}
 
 	/**
 	 * Clears all beans from the IoC context.
@@ -60,6 +72,31 @@ public class IoCContext {
 	public static void clear() {
 
 		beans.clear();
+	}
+
+	/**
+	 * Removes a specific bean from the IoC context.
+	 *
+	 * @param beanType the class type of the bean to remove
+	 */
+	public static void remove(Class<?> beanType) {
+
+		beans.remove(beanType);
+	}
+
+	public static void removeWithDependencies(Class<?> beanType) {
+
+		if (!exists(beanType)) {
+			return;
+		}
+
+		beans.remove(beanType);
+
+		Constructor<?> constructor = BeanFactory.getGreediestConstructor(beanType);
+
+		for (Class<?> paramType : constructor.getParameterTypes()) {
+			removeWithDependencies(paramType);
+		}
 	}
 
 }

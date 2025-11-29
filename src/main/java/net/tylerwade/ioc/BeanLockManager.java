@@ -36,4 +36,5 @@ class BeanLockManager {
 		beanCreationLocks.remove(beanType);
 	}
 
+
 }

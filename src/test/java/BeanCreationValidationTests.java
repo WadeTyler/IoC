@@ -1,4 +1,4 @@
-import net.tylerwade.ioc.IoCContext;
+import net.tylerwade.ioc.Beans;
 import net.tylerwade.ioc.exception.InvalidBeanTypeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,23 +15,23 @@ public class BeanCreationValidationTests {
 	@BeforeEach
 	public void setUp() {
 
-		IoCContext.clear();
+		Beans.clear();
 	}
 
 	@Test
 	void creatingStringBeanShouldThrow() {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(String.class));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(String.class));
 	}
 
 	@Test
 	void creatingObjectWithStandardClassDependencyShouldThrow() {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(Book.class));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(Book.class));
 	}
 
 	@ParameterizedTest
 	@MethodSource("primitiveTypes")
 	void creatingPrimitiveBeanShouldThrow(Class<?> primitiveType) {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(primitiveType));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(primitiveType));
 	}
 
 	private static Stream<Class<?>> primitiveTypes() {
@@ -41,7 +41,7 @@ public class BeanCreationValidationTests {
 	@ParameterizedTest
 	@MethodSource("primitiveWrapperTypes")
 	void creatingPrimitiveWrapperBeanShouldThrow(Class<?> primitiveWrapperType) {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(primitiveWrapperType));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(primitiveWrapperType));
 	}
 
 	private static Stream<Class<?>> primitiveWrapperTypes() {
@@ -51,7 +51,7 @@ public class BeanCreationValidationTests {
 	@ParameterizedTest
 	@MethodSource("standardClasses")
 	void creatingStandardClassBeanShouldThrow(Class<?> standardClass) {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(standardClass));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(standardClass));
 	}
 
 	private static Stream<Class<?>> standardClasses() {
@@ -63,17 +63,17 @@ public class BeanCreationValidationTests {
 
 	@Test
 	void creatingArrayBeanShouldThrow() {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(int[].class));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(int[].class));
 	}
 
 	@Test
 	void creatingEnumBeanShouldThrow() {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(Thread.State.class));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(Thread.State.class));
 	}
 
 	@Test
 	void creatingIoCContextBeanShouldThrow() {
-		assertThrows(InvalidBeanTypeException.class, () -> IoCContext.getBean(IoCContext.class));
+		assertThrows(InvalidBeanTypeException.class, () -> Beans.inject(Beans.class));
 	}
 
 

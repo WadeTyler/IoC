@@ -76,7 +76,7 @@ class BeanFactory {
 	 * @param beanType the class type of the bean
 	 * @return the greediest constructor
 	 */
-	private static Constructor<?> getGreediestConstructor(Class<?> beanType) {
+	public static Constructor<?> getGreediestConstructor(Class<?> beanType) {
 
 		Constructor<?>[] constructors = beanType.getConstructors();
 
@@ -137,7 +137,7 @@ class BeanFactory {
 		Map<Class<?>, Object> dependencies = new HashMap<>();
 
 		for (Class<?> clazz : requiredFields) {
-			Object dependency = IoCContext.getBean(clazz);
+			Object dependency = Beans.inject(clazz);
 			dependencies.put(clazz, dependency);
 		}
 
