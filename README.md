@@ -1,6 +1,6 @@
 # IoC (Inversion of Control) Container
 
-A tiny Java IoC container (dependency injection) for creating and wiring beans with constructor and field injection, plus simple cycle detection.
+A lightweight Java IoC container (dependency injection) for creating and wiring beans with constructor and field injection, plus simple cycle detection.
 
 ## Features
 - Lightweight bean factory for managing object creation
